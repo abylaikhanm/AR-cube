@@ -9,23 +9,29 @@
   <title>View in AR</title>
   <style>
     body {
-      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       height: 100vh;
+      margin: 0;
       background: #f0f0f0;
+      gap: 10px;
     }
-
-    .ar-button {
+    model-viewer {
+      width:250vw;
+      height: 250vh;
+    }
+    model-viewer::part(ar-button) {
       position: absolute;
-      bottom: 24px;
+      top: 75%;
       left: 50%;
-      transform: translateX(-50%);
+      
       background-color: #FF2400;
       color: white;
-      border: none;
       border-radius: 8px;
       padding: 12px 24px;
-      font-size: 18px;
-      cursor: pointer;
+      font-size: 18px
     }
   </style>
 </head>
@@ -34,11 +40,11 @@
     src="topo_mesh.glb"
     ios-src="topo_mesh.usdz"
     ar
-    ar-modes="quick-look"
+    ar-modes="webxr scene-viewer quick-look"
     camera-controls
     auto-rotate>
 
-    <button slot="ar-button" class="ar-button">View in AR</button>
+    <button slot="ar-button">View in AR!</button>
     
   </model-viewer>
 </body>
