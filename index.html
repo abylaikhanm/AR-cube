@@ -3,29 +3,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  
+
   <script type="module"
     src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
   </script>
 
-  <title>View in AR</title>
+  <title>Perovskite Solar Cell AR</title>
 
   <style>
     body {
       margin: 0;
-      overflow: hidden;
+      font-family: Arial, sans-serif;
       background: #f0f0f0;
+      overflow: hidden;
     }
 
     model-viewer {
       width: 100vw;
       height: 100vh;
+      background: #eaeaea;
     }
 
-    /* BIG, VISIBLE BUTTON */
+    /* 🔴 AR BUTTON (SAFE FOR IPHONE) */
     button[slot="ar-button"] {
       position: absolute;
-      bottom: 40px;
+      bottom: calc(110px + env(safe-area-inset-bottom));
       left: 50%;
       transform: translateX(-50%);
 
@@ -34,37 +36,92 @@
       border: none;
       border-radius: 14px;
 
-      padding: 18px 36px;
-      font-size: 22px;
+      padding: 20px 42px;
+      font-size: 24px;
       font-weight: bold;
 
       box-shadow: 0 8px 25px rgba(0,0,0,0.35);
       cursor: pointer;
-
-      transition: all 0.2s ease;
+      z-index: 10;
     }
 
-    button[slot="ar-button"]:hover {
-      transform: translateX(-50%) scale(1.08);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    /* 🧠 PROJECT HEADER */
+    .header {
+      position: absolute;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      color: #222;
+      z-index: 10;
     }
 
-    button[slot="ar-button"]:active {
-      transform: translateX(-50%) scale(0.95);
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
     }
+
+    .header h2 {
+      margin: 5px 0 0 0;
+      font-size: 16px;
+      font-weight: normal;
+      color: #666;
+    }
+
+    /* 📄 DESCRIPTION */
+    .description {
+      position: absolute;
+      top: 110px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80%;
+      max-width: 600px;
+      text-align: center;
+      font-size: 14px;
+      color: #444;
+      line-height: 1.5;
+      z-index: 10;
+    }
+
   </style>
 </head>
 
 <body>
 
+  <!-- 🧠 HEADER -->
+  <div class="header">
+    <h1>Perovskite Solar Cell Structure</h1>
+    <h2>Lehigh University — NHI Lab Project</h2>
+  </div>
+
+  <!-- 📄 DESCRIPTION -->
+  <div class="description">
+    Perovskite solar cells (PSCs) are next-generation thin-film photovoltaic devices 
+    that utilize perovskite-structured materials to efficiently absorb light and convert 
+    it into electrical energy. This model visualizes the surface topology and structural 
+    features relevant to light interaction and energy conversion performance.
+  </div>
+
+  <!-- 🌐 3D MODEL -->
   <model-viewer 
     src="topo_mesh.glb"
     ios-src="topo_mesh.usdz"
+
     ar
     ar-modes="webxr scene-viewer quick-look"
+
     camera-controls
     auto-rotate
-    ar-scale="fixed">
+
+    environment-image="neutral"
+    exposure="1.2"
+    shadow-intensity="1"
+
+    camera-orbit="auto auto auto"
+    field-of-view="30deg"
+
+    interaction-prompt="auto"
+    ar-scale="auto">
 
     <button slot="ar-button">🚀 View in AR</button>
 
