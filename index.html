@@ -3,49 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
   <script type="module"
     src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
   </script>
+
   <title>View in AR</title>
+
   <style>
     body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
       margin: 0;
+      overflow: hidden;
       background: #f0f0f0;
-      gap: 10px;
     }
+
     model-viewer {
-      width:100vw;
+      width: 100vw;
       height: 100vh;
     }
-    model-viewer::part(ar-button) {
+
+    /* BIG, VISIBLE BUTTON */
+    button[slot="ar-button"] {
       position: absolute;
-      top: 75%;
+      bottom: 40px;
       left: 50%;
-      
-      background-color: #FF2400;
+      transform: translateX(-50%);
+
+      background: linear-gradient(135deg, #FF2400, #ff5e3a);
       color: white;
-      border-radius: 8px;
-      padding: 12px 24px;
-      font-size: 18px
+      border: none;
+      border-radius: 14px;
+
+      padding: 18px 36px;
+      font-size: 22px;
+      font-weight: bold;
+
+      box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+      cursor: pointer;
+
+      transition: all 0.2s ease;
+    }
+
+    button[slot="ar-button"]:hover {
+      transform: translateX(-50%) scale(1.08);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+
+    button[slot="ar-button"]:active {
+      transform: translateX(-50%) scale(0.95);
     }
   </style>
 </head>
+
 <body>
+
   <model-viewer 
     src="topo_mesh.glb"
     ios-src="topo_mesh.usdz"
     ar
     ar-modes="webxr scene-viewer quick-look"
     camera-controls
-    auto-rotate>
+    auto-rotate
+    ar-scale="fixed">
 
-    <button slot="ar-button">View in AR!</button>
-    
+    <button slot="ar-button">🚀 View in AR</button>
+
   </model-viewer>
+
 </body>
 </html>
